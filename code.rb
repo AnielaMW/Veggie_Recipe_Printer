@@ -2,7 +2,7 @@
 
 require 'erb'
 
-recipe = {
+@recipe = {
   name: "Roasted Brussels Sprouts",
   ingredients: [
     "1 1/2 pounds Brussels sprouts",
@@ -23,14 +23,24 @@ recipe = {
   ]
 }
 
-recipe_title = "Recipe: #{recipe[:name]}"
+recipe_title = "Recipe: #{@recipe[:name]}"
 
  def ingredients_list
-   @ingredients_list = ""
-   recipe[:ingredients].each do |ingredient|
-     @ingredients_list += ingredient + "\n"
+   ingredients_list = ""
+   @recipe[:ingredients].each do |ingredient|
+     ingredients_list += ingredient + "\n"
    end
-   @ingredients_list
+   ingredients_list
+ end
+
+ def directions_list
+   directions_list = ""
+   direction_num = 1
+   @recipe[:directions].each do |direction|
+     directions_list += direction_num.to_s + ". " + direction + "\n"
+     direction_num += 1
+   end
+   directions_list
  end
 
 recipe_template = <<-ERB
@@ -41,8 +51,11 @@ recipe_template = <<-ERB
 
 Ingredients
 -----------
-
 <%= ingredients_list %>
+
+Directions
+----------
+<%= directions_list %>
 
 ERB
 
