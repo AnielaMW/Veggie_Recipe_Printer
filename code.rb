@@ -28,17 +28,16 @@ recipe_title = "Recipe: #{@recipe[:name]}"
  def ingredients_list
    ingredients_list = ""
    @recipe[:ingredients].each do |ingredient|
-     ingredients_list += ingredient + "\n"
+     ingredients_list += "#{ingredient}\n"
    end
    ingredients_list
  end
 
  def directions_list
    directions_list = ""
-   direction_num = 1
-   @recipe[:directions].each do |direction|
-     directions_list += direction_num.to_s + ". " + direction + "\n"
-     direction_num += 1
+   @recipe[:directions].each_with_index do |direction, index|
+     direction_num = index + 1
+     directions_list += "#{index + 1}. #{direction}\n"
    end
    directions_list
  end
